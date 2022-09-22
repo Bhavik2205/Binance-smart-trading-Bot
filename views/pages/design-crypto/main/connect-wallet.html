@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+  <title>Document</title>
+  <meta name="description" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <meta name="author" content="Document">
+  <meta property="og:site_name" content="" />
+  <!-- website name -->
+  <meta property="og:site" content="" />
+  <!-- website link -->
+  <meta property="og:title" content="Document" />
+  <!-- title shown in the actual shared post -->
+  <meta property="og:description" content="" />
+  <!-- description shown in the actual shared post -->
+  <meta property="og:image" content="" />
+  <!-- image link, make sure it's jpg -->
+  <meta property="og:url" content="" />
+  <!-- where do you want your post to link to -->
+  <meta property="og:type" content="article" />
+  <link rel="icon" href="images/favicon.png" type="image/png" sizes="25x25">
+  <!-- fontawesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" />
+  <!-- google fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- stylesheets -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/app.css" rel="stylesheet" />
+  <link href="assets/css/common.css" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="wrapper wh-100 bgs-secondary">
+    <div class="container">
+      <form class="text-dark" action="index.html" method="post">
+        <div class="white-card">
+          <div class="row fs-xs">
+            <div class="col-md-12 col-lg-8 my-3">
+              <div class="row">
+                <div class="col-sm-12 col-md-6 my-2">
+                  <div class="d-flex">
+                    <label class="me-4">Account name:</label>
+                    <div class="fm-control-sm">
+                      <input type="text" id="account-name-f" name="" value="">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6 my-2">
+                  <div class="d-flex">
+                    <label class="me-4">Portfolio currency:</label>
+                    <div class="fm-control-sm">
+                      <input type="text" id="portfolio-currency-f" name="" value="" readonly>
+                      <span class="label px-2">USDT</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-12 my-2">
+                  <div class="d-flex">
+                    <label class="me-4">Your API key:</label>
+                    <div class="fm-control-sm">
+                      <input type="text" id="API-key-f" name="" value="">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-12 my-2">
+                  <div class="d-flex">
+                    <label class="me-4">Your API secret:</label>
+                    <div class="fm-control-sm">
+                      <input type="text" id="API-secret-f" name="" value="">
+                      <i class="fa-solid fa-eye-slash fs-xxs px-2"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="check-fields my-5 mx-3">
+                <p>Please fill in all the fields and click the “Connect Account” button to
+                  connect your exchange</p>
+              </div>
+
+              <div class="">
+                <p>
+                  By clicking the “Connect Exchange” button below I acknowledge my full awareness of
+                  all legislation applicable to me, such as all local, state, or national legislation
+                  related to trading and/or holding digital currencies and/or similar assets.
+                </p>
+                <p>
+                  I agree to act in compliance with Legislation.
+                </p>
+                <p>
+                  I agree and I am aware of all risk and my full responsibility if I breach any Legislation.
+                </p>
+                <p>
+                  I agree and I am expressly aware of the provisions of Article 22 of
+                  <a href="#" class="text-decoration-underline">Terms and Conditions.</a>
+                </p>
+              </div>
+            </div>
+            <div class="col-md-12 col-lg-4 my-3">
+              <div class="dark-card text-white">
+                <div class="text-center mb-3">
+                  <img src="images/653ace4e7ac98502dc02.svg" alt="" class="img-fluid">
+                </div>
+                <p>
+                  We will need to validate following points in order to connect your account:
+                </p>
+
+                <ul class="checking-keys mt-3">
+                  <li>
+                    <div class="my-2 d-flex align-items-center" id="v-API-key-check">
+                      <i class="fa-solid fa-circle"></i>
+                      <span>Valid API key</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="my-2 d-flex align-items-center" id="futures-trading-check">
+                      <i class="fa-solid fa-circle"></i>
+                      <span>Futures trading: enabled</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="my-2 d-flex align-items-center" id="hedging-mode-check">
+                      <i class="fa-solid fa-circle"></i>
+                      <span>Hedging mode: enabled</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="my-2 d-flex align-items-center" id="cross-margin-check">
+                      <i class="fa-solid fa-circle"></i>
+                      <span>Cross-margin: enabled</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="my-2">
+          <button type="button" id="connect-account-submit" name="button" class="btn btn-primary btn-prime">
+            Connect Accout</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  <script src="assets/js/app.js" charset="utf-8"></script>
+  <script src="assets/js/common.js" charset="utf-8"></script>
+</body>
+</html>

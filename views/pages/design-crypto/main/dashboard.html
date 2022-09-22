@@ -1,0 +1,1456 @@
+<!doctype html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+  <title>Document</title>
+  <meta name="description" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <meta name="author" content="Document">
+  <meta property="og:site_name" content="" />
+  <!-- website name -->
+  <meta property="og:site" content="" />
+  <!-- website link -->
+  <meta property="og:title" content="Document" />
+  <!-- title shown in the actual shared post -->
+  <meta property="og:description" content="" />
+  <!-- description shown in the actual shared post -->
+  <meta property="og:image" content="" />
+  <!-- image link, make sure it's jpg -->
+  <meta property="og:url" content="" />
+  <!-- where do you want your post to link to -->
+  <meta property="og:type" content="article" />
+  <link rel="icon" href="images/favicon.png" type="image/png" sizes="25x25">
+  <!-- fontawesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" />
+  <!-- google fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- stylesheets -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/app.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- header start -->
+  <header class="top-bar gradient-blue-1">
+    <div class="logo-area"></div>
+    <div class="quick-area d-flex align-items-center justify-content-between">
+      <div class="pull-left">
+        <ul class="quick-menu-info d-flex align-items">
+          <li class="sidebar-toggler-wrap pointer" onclick="sidebarToggler();">
+            <a href="#" class="sidebar-toggler" data-toggle="sidebar">
+              <i class="fa-solid fa-bars"></i>
+            </a>
+          </li>
+          <li class="quick-nav-item">
+            <a href="#" class="quick-nav-link">
+              Schedule
+            </a>
+          </li>
+          <li class="quick-nav-item active">
+            <a href="#" class="quick-nav-link">
+              <i class="fa-solid fa-chart-area me-1"></i>
+              Reports
+            </a>
+          </li>
+          <li class="quick-nav-item">
+            <a href="#" class="quick-nav-link">
+              <i class="fa-solid fa-folder-tree me-1"></i>
+              Trading
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="pull-right">
+        <ul class="quick-menu-info d-flex align-items">
+          <li class="notify-toggle-wrapper spec">
+            <a href="#" class="toggle">
+              <i class="fa-solid fa-bell"></i>
+              <span class="badge prime-badge" id="">0</span>
+            </a>
+            <ul class="dropdown-menu notifications">
+              <li class="total d-flex justify-content-between border-bottom py-2">
+                <span class="fw-light">You have <span class="fw-bold" id="">3</span> new notifications.</span>
+                <span class="fw-light" id="mark-read">Mark all as Read</span>
+              </li>
+              <li class="list ps-container py-2">
+                <ul class="dropdown-menu-list">
+                  <li class="available py-2 border-bottom">
+                    <a href="#" class="unread">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md text-success me-3">
+                          <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="name">
+                          <strong>
+                            Successful transaction of 0.01 BTC
+                          </strong>
+                          <p class="fs-xxs">15 mins ago</p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="away py-2 border-bottom">
+                    <a href="#" class="unread">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md text-warning me-3">
+                          <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div class="name">
+                          <strong>
+                            Successful transaction of 0.01 BTC
+                          </strong>
+                          <p class="fs-xxs">15 mins ago</p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="busy py-2 border-bottom">
+                    <a href="#" class="read">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md text-danger me-3">
+                          <i class="fa-solid fa-circle-xmark"></i>
+                        </div>
+                        <div class="name">
+                          <strong>
+                            Successful transaction of 0.01 BTC
+                          </strong>
+                          <p class="fs-xxs">15 mins ago</p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="available py-2">
+                    <a href="#" class="read">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md text-success me-3">
+                          <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="name">
+                          <strong>
+                            Successful transaction of 0.01 BTC
+                          </strong>
+                          <p class="fs-xxs">15 mins ago</p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="external py-2">
+                <a href="#" class="text-grey">
+                  <span>Read All Notifications</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="message-toggle-wrapper spec">
+            <a href="#" class="toggle">
+              <i class="fa-solid fa-envelope"></i>
+              <span class="badge prime-badge" id="">0</span>
+            </a>
+            <ul class="dropdown-menu messages">
+              <li class="list ps-container py-2">
+                <ul class="dropdown-menu-list">
+                  <li class="available ls-item py-2 border-bottom">
+                    <a href="#" class="unread">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md text-success me-3">
+                          <img src="images/avatar-1.png" alt="" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="name">
+                          <strong>
+                            Clarine Vassar
+                          </strong>
+                          <span class="fs-xxs">- 15 mins ago</span>
+                          <p class="fs-xxs">Lorem ipsum dolor sit elit fugiat molest.</p>
+                          <span class="profile-status bg-success"></span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="away ls-item py-2 border-bottom">
+                    <a href="#" class="read">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md text-warning me-3">
+                          <img src="images/avatar-2.png" alt="" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="name">
+                          <strong>
+                            Brooks Latshaw
+                          </strong>
+                          <span class="fs-xxs">- 45 mins ago</span>
+                          <p class="fs-xxs">Lorem ipsum dolor sit elit fugiat molest.</p>
+                          <span class="profile-status bg-warning"></span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="busy ls-item py-2 border-bottom">
+                    <a href="#" class="read">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md text-danger me-3">
+                          <img src="images/avatar-3.png" alt="" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="name">
+                          <strong>
+                            Clementina Brodeur
+                          </strong>
+                          <span class="fs-xxs">- 1 hour ago</span>
+                          <p class="fs-xxs">Lorem ipsum dolor sit elit fugiat molest.</p>
+                          <span class="profile-status bg-danger"></span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="available ls-item py-2">
+                    <a href="#" class="read">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md text-success me-3">
+                          <img src="images/avatar-4.png" alt="" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="name">
+                          <strong>
+                            Carri Busey
+                          </strong>
+                          <span class="fs-xxs">- 5 hours ago</span>
+                          <p class="fs-xxs">Lorem ipsum dolor sit elit fugiat molest.</p>
+                          <span class="profile-status bg-secondary"></span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="external py-2">
+                <a href="#" class="text-grey">
+                  <span>Read All Notifications</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="profile d-flex align-items-center spec">
+            <a href="#" class="toggle">
+              <img src="images/profile.jpg" alt="user" class="user-img rounded-circle">
+              <span>
+                Arnold Ramsy
+                <i class="fa fa-angle-down fs-xxs"></i>
+              </span>
+            </a>
+            <ul class="dropdown-menu profile-menu">
+              <li>
+                <a href="#" class="text-dark">
+                  <i class="fa-solid fa-wrench fs-xxs me-2"></i>
+                  <span class="profile-item">Settings</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-dark">
+                  <i class="fa-solid fa-user fs-xxs me-2"></i>
+                  <span class="profile-item">Profile</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-dark">
+                  <i class="fa-solid fa-info fs-xxs me-2"></i>
+                  <span class="profile-item">Help</span>
+                </a>
+              </li>
+              <li class="active">
+                <a href="#" class="text-dark">
+                  <i class="fa-solid fa-lock fs-xxs me-2"></i>
+                  <span class="profile-item">Logout</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <!-- header end -->
+
+  <!-- whole content start -->
+  <div class="content-row-wrapper">
+    <!-- sidebar start -->
+    <div class="sidebar-area">
+      <ul class="wraplist">
+        <li class="menusection text-secondary text-uppercase fs-xs px-0 py-3">
+          Main
+        </li>
+
+        <li class="">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/1.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Dashboard
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li class="">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/2.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Crypto Wallet
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li class="">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/3.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Buy & Sell
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li class="">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/4.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                ICO Admin
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li class="">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/5.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Affiliate Program
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li class="">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/6.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Trader Profile
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li class="">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/7.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Support
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/8.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Settings
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Personal Settings
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Account Settings
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/9.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Access Pages
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Login
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Registration
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                404
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/10.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Mailbox
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Inbox
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Compose
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                View
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Important Mail
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Mail Trash
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="menusection text-secondary text-uppercase fs-xs px-0 py-3">
+          Data Visualization
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/11.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Echarts
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Line & Area Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Bar & Stacked Charts
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/12.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Morris Charts
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Line Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Bar & Stacked Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Area Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Pie Charts
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/13.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Charts JS
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Line Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Bar Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Pie & Donut
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/14.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Flot Charts
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Area Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Line Charts
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/15.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Sparkline Charts
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Line & Area Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Bar Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Composite Charts
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="menusection text-secondary text-uppercase fs-xs px-0 py-3">
+          User Interface
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/16.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Ui Elements
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Timeline
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Pricing Tables
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Icon Sets
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Form Elements
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Form Wizard
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Form Validations
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/17.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Components
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Tabs
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Accordions
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Progress Bars
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Buttons
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Modals
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Alerts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Notifications
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Tooltips
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Popovers
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/18.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Appearance
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Inbox
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Compose
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                View
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Important Mail
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Mail Trash
+              </a>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content start -->
+    <div class="content-area">
+      <section class="">
+        <div class="container">
+          <div class="heading-box d-flex flex-column flex-sm-row align-items-center justify-content-between">
+            <h5 class="text-title fw-bold my-1">Crypto Dashboard</h5>
+            <button type="button" name="button" class="my-1 btn btn-primary gradient-blue">Connect Account</button>
+          </div>
+
+          <div class="row my-2">
+            <div class="col-12 col-sm-6 col-lg-3 my-3">
+              <div class="white-card">
+                <div class="d-flex align-items-center">
+                  <div class="icon-lg me-2">
+                    <img src="images/s1.png" alt="" class="img-fluid">
+                  </div>
+                  <div class="text-dark">
+                    <h5 class="fw-bold">$4,456.98</h5>
+                    <p class="text-title fs-xs">Account Balance</p>
+                  </div>
+                </div>
+                <div class="">
+                  <canvas class="top-graph-sm" id="Account-Balance"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3 my-3">
+              <div class="white-card">
+                <div class="d-flex align-items-center">
+                  <div class="icon-lg me-2">
+                    <img src="images/s2.png" alt="" class="img-fluid">
+                  </div>
+                  <div class="text-dark">
+                    <h5 class="fw-bold">$4,456.98</h5>
+                    <p class="text-title fs-xs">Account Balance</p>
+                  </div>
+                </div>
+                <div class="">
+                  <canvas class="top-graph-sm" id="Total-Income"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3 my-3">
+              <div class="white-card">
+                <div class="d-flex align-items-center">
+                  <div class="icon-lg me-2">
+                    <img src="images/s3.png" alt="" class="img-fluid">
+                  </div>
+                  <div class="text-dark">
+                    <h5 class="fw-bold">$4,456.98</h5>
+                    <p class="text-title fs-xs">Rate of Return</p>
+                  </div>
+                </div>
+                <div class="">
+                  <canvas class="top-graph-sm" id="Return-Rate-Chart"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3 my-3">
+              <div class="white-card">
+                <div class="d-flex align-items-center">
+                  <div class="icon-lg me-2">
+                    <img src="images/s4.png" alt="" class="img-fluid">
+                  </div>
+                  <div class="text-dark">
+                    <h5 class="fw-bold">$4,456.98</h5>
+                    <p class="text-title fs-xs">Account Balance</p>
+                  </div>
+                </div>
+                <div class="">
+                  <canvas class="top-graph-sm" id="Trades-Number-Chart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- part 2 -->
+          <div class="row my-2">
+            <div class="col-sm-12 col-md-6 col-lg-4 my-3">
+              <div class="white-card">
+                <div class="d-flex align-items-center">
+                  <div class="icon-lg me-3">
+                    <img src="images/coin1.png" alt="" class="img-fluid">
+                  </div>
+                  <div class="text-dark">
+                    <h5 class="lh-lg">Bitcoin Balance</h5>
+                    <p class="lh-lg text-secondary">0.312373</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 my-3">
+              <div class="white-card">
+                <div class="d-flex align-items-center">
+                  <div class="icon-lg me-3">
+                    <img src="images/coin2.png" alt="" class="img-fluid">
+                  </div>
+                  <div class="text-dark">
+                    <h5 class="lh-lg">Eth Balance</h5>
+                    <p class="lh-lg text-secondary">1.007346</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 my-3">
+              <div class="white-card">
+                <div class="d-flex align-items-center">
+                  <div class="icon-lg me-3">
+                    <img src="images/coin3.png" alt="" class="img-fluid">
+                  </div>
+                  <div class="text-dark">
+                    <h5 class="lh-lg">Dash Balance</h5>
+                    <p class="lh-lg text-secondary">0.008923</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- part 3 -->
+          <div class="row my-2">
+            <div class="col-md-12 col-lg-8">
+              <div class="white-card">
+                <div class="card-head text-dark py-3 border-bottom">
+                  <p class="fs-sm">Crypto Balance Statistics</p>
+                </div>
+
+                <div class="">
+                  <canvas class="top-graph-sm" id="Crypto-Balance-Statistics"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 col-lg-4">
+              <div class="white-card">
+                <div class="card-head text-dark py-3 border-bottom">
+                  <p class="fs-sm">Stock Status</p>
+                </div>
+
+                <div class="row my-2 text-break">
+                  <div class="col-12">
+                    <div class="border-card d-flex align-items-center justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md me-3">
+                          <img src="images/coin1.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="">
+                          <span class="fw-bold">Bitcoin</span>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="me-3">
+                          <span>$8.958</span>
+                        </div>
+                        <div class="">
+                          <span class="text-success">4.98%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 my-1">
+                    <div class="border-card d-flex align-items-center justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md me-3">
+                          <img src="images/coin2.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="">
+                          <span class="fw-bold">Ethereum</span>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="me-3">
+                          <span>$8.958</span>
+                        </div>
+                        <div class="">
+                          <span class="text-warning">-4.98%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 my-1">
+                    <div class="border-card d-flex align-items-center justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md me-3">
+                          <img src="images/coin3.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="">
+                          <span class="fw-bold">Dashcoin</span>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="me-3">
+                          <span>$8.958</span>
+                        </div>
+                        <div class="">
+                          <span class="text-success">4.98%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 my-1">
+                    <div class="border-card d-flex align-items-center justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md me-3">
+                          <img src="images/coin8.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="">
+                          <span class="fw-bold">Litecoin</span>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="me-3">
+                          <span>$8.958</span>
+                        </div>
+                        <div class="">
+                          <span class="text-warning">-4.98%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 my-1">
+                    <div class="border-card d-flex align-items-center justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md me-3">
+                          <img src="images/coin6.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="">
+                          <span class="fw-bold">Dogecoin</span>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="me-3">
+                          <span>$8.958</span>
+                        </div>
+                        <div class="">
+                          <span class="text-success">4.98%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 my-1">
+                    <div class="border-card d-flex align-items-center justify-content-between">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md me-3">
+                          <img src="images/coin7.png" alt="" class="img-fluid">
+                        </div>
+                        <div class="">
+                          <span class="fw-bold">Monero</span>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="me-3">
+                          <span>$8.958</span>
+                        </div>
+                        <div class="">
+                          <span class="text-success">4.98%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- part 4 -->
+          <div class="row my-2">
+            <div class="col-md-12 col-lg-4 my-3">
+              <div class="white-card">
+                <div class="card-head text-dark py-3 border-bottom">
+                  <p class="fs-sm">Transactions Status</p>
+                </div>
+                <div class="pie-chart">
+                  <canvas class="top-graph-sm" id="Transactions-Status"></canvas>
+                </div>
+
+                <div class="row my-2">
+                  <div class="col-md-12 col-lg-6 my-3">
+                    <div class="sm-card left-danger">
+                      <h3 class="fw-bold">44%</h3>
+                      <p class="fs-xs">Completed</p>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-lg-6 my-3">
+                    <div class="sm-card left-success">
+                      <h3 class="fw-bold">34%</h3>
+                      <p class="fs-xs">Completed</p>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-lg-6 my-3">
+                    <div class="sm-card left-warning">
+                      <h3 class="fw-bold">22%</h3>
+                      <p class="fs-xs">Completed</p>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-lg-6 my-3">
+                    <div class="sm-card left-grey">
+                      <h3 class="fw-bold">14%</h3>
+                      <p class="fs-xs">Completed</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-lg-8">
+              <div class="row">
+                <div class="col-md-sm-12 col-md-6 my-3">
+                  <div class="white-card">
+                    <div class="card-head text-dark py-3 border-bottom">
+                      <p class="fs-sm">Total Funds</p>
+                      <p class="fs-xxs">Complete transactions</p>
+                    </div>
+
+                    <div class="mt-4">
+                      <canvas class="top-graph-md" id="Total-Funds"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-sm-12 col-md-6 my-3">
+                  <div class="white-card">
+                    <div class="text-center text-dark">
+                      <div class="">
+                        <img src="images/crypto-wallet.png" alt="" class="img-fluid">
+                      </div>
+                      <div class="mt-4">
+                        <p class="fw-bold">Start crypto trading Today</p>
+                        <p class="fs-xs">Lorem ipsum dolor sit amet, Eveniet magni sit explicabo
+                          Quo nihil atque.</p>
+                      </div>
+                      <div class="mt-4">
+                        <button type="button" name="button" class="btn btn-primary gradient-blue w-100">Connect Account</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-sm-12 col-md-12 my-3">
+                  <div class="white-card gradient-blue">
+                    <div class="d-flex flex-column flex-sm-row align-items-center">
+                      <div class="me-4 py-2">
+                        <img src="images/crypto-buy.png" alt="" class="img-fluid">
+                      </div>
+                      <div class="py-2">
+                        <h5 class="fw-bold py-1">Buy & Sell Crypto Directly and Easily</h5>
+                        <p class="fs-xs py-1">lorem ipsum dolor sit elit. Perferendis veniam exercitationem
+                          ducimus magni distinctio sit explicabo.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- part 5 -->
+          <div class="row my-2">
+            <div class="col-md-12 col-lg-6 my-3">
+              <div class="white-card">
+                <div class="card-head text-dark py-3 border-bottom">
+                  <p class="fs-sm">Recent Activities</p>
+                </div>
+                <div class="text-dark py-2">
+                  <table class="table-css text-break">
+                    <thead>
+                      <th>Crypto Orders</th>
+                      <th>Status</th>
+                      <th>Amount</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="icon-md me-3">
+                              <img src="images/p1.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="">
+                              <p class="fs-xs fw-bold">Buy Record</p>
+                              <p class="fs-xxs"><span>11-26</span> <span>10:23:45</span></p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="badge badge-prime bg-info fw-light fs-xxs">completed</div>
+                        </td>
+                        <td>
+                          <span class="text-success">+3,800$</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="icon-md me-3">
+                              <img src="images/p2.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="">
+                              <p class="fs-xs fw-bold">Sell Record</p>
+                              <p class="fs-xxs"><span>11-26</span> <span>10:23:45</span></p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="badge badge-prime bg-warning fw-light fs-xxs">pending</div>
+                        </td>
+                        <td>
+                          <span class="text-danger">-1,760$</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="icon-md me-3">
+                              <img src="images/p3.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="">
+                              <p class="fs-xs fw-bold">Exchange Record</p>
+                              <p class="fs-xxs"><span>11-26</span> <span>10:23:45</span></p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="badge badge-prime bg-secondary fw-light fs-xxs">exchanged</div>
+                        </td>
+                        <td>
+                          <span class="text-info">+20,760$</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="icon-md me-3">
+                              <img src="images/p1.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="">
+                              <p class="fs-xs fw-bold">Buy Record</p>
+                              <p class="fs-xxs"><span>11-26</span> <span>10:23:45</span></p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="badge badge-prime bg-danger fw-light fs-xxs">canceled</div>
+                        </td>
+                        <td>
+                          <span class="text-success">+10,760$</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="icon-md me-3">
+                              <img src="images/p2.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="">
+                              <p class="fs-xs fw-bold">Buy Record</p>
+                              <p class="fs-xxs"><span>11-26</span> <span>10:23:45</span></p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="badge badge-prime bg-info fw-light fs-xxs">completed</div>
+                        </td>
+                        <td>
+                          <span class="text-danger">-8,760$</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 col-lg-6 my-3">
+              <div class="white-card">
+                <div class="card-head text-dark py-3 border-bottom">
+                  <p class="fs-sm">Recent Activities</p>
+                </div>
+                <div class="text-dark py-2">
+                  <table class="table-css text-break">
+                    <thead>
+                      <th>Crypto Orders</th>
+                      <th>Time</th>
+                      <th>Status</th>
+                      <th>Amount</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="icon-md me-3">
+                              <img src="images/coin1.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="">
+                              <p class="fs-xs fw-bold">Bitcoin</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="fs-xxs">10:23:45</span>
+                        </td>
+                        <td>
+                          <div class="badge badge-prime bg-info fw-light fs-xxs">completed</div>
+                        </td>
+                        <td>
+                          <span class="text-success">+0,041BTC</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="icon-md me-3">
+                              <img src="images/coin8.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="">
+                              <p class="fs-xs fw-bold">Litecoin</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="fs-xxs">10:23:45</span>
+                        </td>
+                        <td>
+                          <div class="badge badge-prime bg-warning fw-light fs-xxs">pending</div>
+                        </td>
+                        <td>
+                          <span class="text-danger">-1,176LTC</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="icon-md me-3">
+                              <img src="images/coin2.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="">
+                              <p class="fs-xs fw-bold">Ethereum</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="fs-xxs">10:23:45</span>
+                        </td>
+                        <td>
+                          <div class="badge badge-prime bg-secondary fw-light fs-xxs">exchanged </div>
+                        </td>
+                        <td>
+                          <span class="text-info">0.023ETH</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="icon-md me-3">
+                              <img src="images/coin4.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="">
+                              <p class="fs-xs fw-bold">Ripple</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="fs-xxs">10:23:45</span>
+                        </td>
+                        <td>
+                          <div class="badge badge-prime bg-danger fw-light fs-xxs">canceled</div>
+                        </td>
+                        <td>
+                          <span class="text-success">+107,0XRP</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="icon-md me-3">
+                              <img src="images/coin1.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="">
+                              <p class="fs-xs fw-bold">Bitcoin</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="fs-xxs">10:23:45</span>
+                        </td>
+                        <td>
+                          <div class="badge badge-prime bg-warning fw-light fs-xxs">pending</div>
+                        </td>
+                        <td>
+                          <span class="text-success">-0,098BTC</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="icon-md me-3">
+                              <img src="images/coin3.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="">
+                              <p class="fs-xs fw-bold">Dashcoin</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="fs-xxs">10:23:45</span>
+                        </td>
+                        <td>
+                          <div class="badge badge-prime bg-info fw-light fs-xxs">completed</div>
+                        </td>
+                        <td>
+                          <span class="text-danger">-2,76DAH</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <div class="icon-md me-3">
+                              <img src="images/coin5.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="">
+                              <p class="fs-xs fw-bold">Bitdash</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="fs-xxs">10:23:45</span>
+                        </td>
+                        <td>
+                          <div class="badge badge-prime bg-info fw-light fs-xxs">completed</div>
+                        </td>
+                        <td>
+                          <span class="text-success">+1,429DAH</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+    <!-- content end -->
+  </div>
+  <!-- whole content end -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script src="assets/js/app.js" charset="utf-8"></script>
+</body>
+</html>

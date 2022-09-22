@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+  <title>Document</title>
+  <meta name="description" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <meta name="author" content="Document">
+  <meta property="og:site_name" content="" />
+  <!-- website name -->
+  <meta property="og:site" content="" />
+  <!-- website link -->
+  <meta property="og:title" content="Document" />
+  <!-- title shown in the actual shared post -->
+  <meta property="og:description" content="" />
+  <!-- description shown in the actual shared post -->
+  <meta property="og:image" content="" />
+  <!-- image link, make sure it's jpg -->
+  <meta property="og:url" content="" />
+  <!-- where do you want your post to link to -->
+  <meta property="og:type" content="article" />
+  <link rel="icon" href="images/favicon.png" type="image/png" sizes="25x25">
+  <!-- fontawesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" />
+  <!-- google fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- stylesheets -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/app.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- header start -->
+  <header class="top-bar gradient-blue-1">
+    <div class="logo-area"></div>
+    <div class="quick-area d-flex align-items-center justify-content-between">
+      <div class="pull-left">
+        <ul class="quick-menu-info d-flex align-items">
+          <li class="sidebar-toggler-wrap pointer" onclick="sidebarToggler();">
+            <a href="#" class="sidebar-toggler" data-toggle="sidebar">
+              <i class="fa-solid fa-bars"></i>
+            </a>
+          </li>
+          <li class="quick-nav-item">
+            <a href="#" class="quick-nav-link">
+              Schedule
+            </a>
+          </li>
+          <li class="quick-nav-item active">
+            <a href="#" class="quick-nav-link">
+              <i class="fa-solid fa-chart-area me-1"></i>
+              Reports
+            </a>
+          </li>
+          <li class="quick-nav-item">
+            <a href="#" class="quick-nav-link">
+              <i class="fa-solid fa-folder-tree me-1"></i>
+              Trading
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="pull-right">
+        <ul class="quick-menu-info d-flex align-items">
+          <li class="notify-toggle-wrapper spec">
+            <a href="#" class="toggle">
+              <i class="fa-solid fa-bell"></i>
+              <span class="badge prime-badge" id="">0</span>
+            </a>
+            <ul class="dropdown-menu notifications">
+              <li class="total d-flex justify-content-between border-bottom py-2">
+                <span class="fw-light">You have <span class="fw-bold" id="">3</span> new notifications.</span>
+                <span class="fw-light" id="mark-read">Mark all as Read</span>
+              </li>
+              <li class="list ps-container py-2">
+                <ul class="dropdown-menu-list">
+                  <li class="available py-2 border-bottom">
+                    <a href="#" class="unread">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md text-success me-3">
+                          <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="name">
+                          <strong>
+                            Successful transaction of 0.01 BTC
+                          </strong>
+                          <p class="fs-xxs">15 mins ago</p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="away py-2 border-bottom">
+                    <a href="#" class="unread">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md text-warning me-3">
+                          <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div class="name">
+                          <strong>
+                            Successful transaction of 0.01 BTC
+                          </strong>
+                          <p class="fs-xxs">15 mins ago</p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="busy py-2 border-bottom">
+                    <a href="#" class="read">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md text-danger me-3">
+                          <i class="fa-solid fa-circle-xmark"></i>
+                        </div>
+                        <div class="name">
+                          <strong>
+                            Successful transaction of 0.01 BTC
+                          </strong>
+                          <p class="fs-xxs">15 mins ago</p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="available py-2">
+                    <a href="#" class="read">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md text-success me-3">
+                          <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="name">
+                          <strong>
+                            Successful transaction of 0.01 BTC
+                          </strong>
+                          <p class="fs-xxs">15 mins ago</p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="external py-2">
+                <a href="#" class="text-grey">
+                  <span>Read All Notifications</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="message-toggle-wrapper spec">
+            <a href="#" class="toggle">
+              <i class="fa-solid fa-envelope"></i>
+              <span class="badge prime-badge" id="">0</span>
+            </a>
+            <ul class="dropdown-menu messages">
+              <li class="list ps-container py-2">
+                <ul class="dropdown-menu-list">
+                  <li class="available ls-item py-2 border-bottom">
+                    <a href="#" class="unread">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md text-success me-3">
+                          <img src="images/avatar-1.png" alt="" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="name">
+                          <strong>
+                            Clarine Vassar
+                          </strong>
+                          <span class="fs-xxs">- 15 mins ago</span>
+                          <p class="fs-xxs">Lorem ipsum dolor sit elit fugiat molest.</p>
+                          <span class="profile-status bg-success"></span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="away ls-item py-2 border-bottom">
+                    <a href="#" class="read">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md text-warning me-3">
+                          <img src="images/avatar-2.png" alt="" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="name">
+                          <strong>
+                            Brooks Latshaw
+                          </strong>
+                          <span class="fs-xxs">- 45 mins ago</span>
+                          <p class="fs-xxs">Lorem ipsum dolor sit elit fugiat molest.</p>
+                          <span class="profile-status bg-warning"></span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="busy ls-item py-2 border-bottom">
+                    <a href="#" class="read">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md text-danger me-3">
+                          <img src="images/avatar-3.png" alt="" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="name">
+                          <strong>
+                            Clementina Brodeur
+                          </strong>
+                          <span class="fs-xxs">- 1 hour ago</span>
+                          <p class="fs-xxs">Lorem ipsum dolor sit elit fugiat molest.</p>
+                          <span class="profile-status bg-danger"></span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="available ls-item py-2">
+                    <a href="#" class="read">
+                      <div class="d-flex align-items-center">
+                        <div class="icon-md text-success me-3">
+                          <img src="images/avatar-4.png" alt="" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="name">
+                          <strong>
+                            Carri Busey
+                          </strong>
+                          <span class="fs-xxs">- 5 hours ago</span>
+                          <p class="fs-xxs">Lorem ipsum dolor sit elit fugiat molest.</p>
+                          <span class="profile-status bg-secondary"></span>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="external py-2">
+                <a href="#" class="text-grey">
+                  <span>Read All Notifications</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="profile d-flex align-items-center spec">
+            <a href="#" class="toggle">
+              <img src="images/profile.jpg" alt="user" class="user-img rounded-circle">
+              <span>
+                Arnold Ramsy
+                <i class="fa fa-angle-down fs-xxs"></i>
+              </span>
+            </a>
+            <ul class="dropdown-menu profile-menu">
+              <li>
+                <a href="#" class="text-dark">
+                  <i class="fa-solid fa-wrench fs-xxs me-2"></i>
+                  <span class="profile-item">Settings</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-dark">
+                  <i class="fa-solid fa-user fs-xxs me-2"></i>
+                  <span class="profile-item">Profile</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-dark">
+                  <i class="fa-solid fa-info fs-xxs me-2"></i>
+                  <span class="profile-item">Help</span>
+                </a>
+              </li>
+              <li class="active">
+                <a href="#" class="text-dark">
+                  <i class="fa-solid fa-lock fs-xxs me-2"></i>
+                  <span class="profile-item">Logout</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <!-- header end -->
+
+  <!-- whole content start -->
+  <div class="content-row-wrapper">
+    <!-- sidebar start -->
+    <div class="sidebar-area">
+      <ul class="wraplist">
+        <li class="menusection text-secondary text-uppercase fs-xs px-0 py-3">
+          Main
+        </li>
+
+        <li class="">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/1.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Dashboard
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li class="">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/2.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Crypto Wallet
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li class="">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/3.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Buy & Sell
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li class="">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/4.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                ICO Admin
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li class="">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/5.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Affiliate Program
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li class="">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/6.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Trader Profile
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li class="">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/7.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Support
+              </span>
+            </div>
+          </a>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/8.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Settings
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Personal Settings
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Account Settings
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/9.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Access Pages
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Login
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Registration
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                404
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/10.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Mailbox
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Inbox
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Compose
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                View
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Important Mail
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Mail Trash
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="menusection text-secondary text-uppercase fs-xs px-0 py-3">
+          Data Visualization
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/11.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Echarts
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Line & Area Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Bar & Stacked Charts
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/12.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Morris Charts
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Line Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Bar & Stacked Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Area Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Pie Charts
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/13.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Charts JS
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Line Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Bar Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Pie & Donut
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/14.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Flot Charts
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Area Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Line Charts
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/15.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Sparkline Charts
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Line & Area Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Bar Charts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Composite Charts
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="menusection text-secondary text-uppercase fs-xs px-0 py-3">
+          User Interface
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/16.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Ui Elements
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Timeline
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Pricing Tables
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Icon Sets
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Form Elements
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Form Wizard
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Form Validations
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/17.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Components
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Tabs
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Accordions
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Progress Bars
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Buttons
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Modals
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Alerts
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Notifications
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Tooltips
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Popovers
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="open">
+          <a href="#" class="fs-xs text-dark">
+            <div class="d-flex align-items-center sidebar-menu-item">
+              <div class="sidebar-ls-image">
+                <img src="images/18.png" alt="" class="img-fluid icon-sm">
+              </div>
+              <span class="title">
+                Appearance
+                <span class="arrow">
+                  <i class="fa-solid fa-angle-left fs-xxs"></i>
+                </span>
+              </span>
+            </div>
+          </a>
+          <ul class="sub-menu">
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Inbox
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Compose
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                View
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Important Mail
+              </a>
+            </li>
+            <li class="sub-menu-item">
+              <a href="#" class="fs-xs text-dark">
+                Mail Trash
+              </a>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content start -->
+    <div class="content-area">
+      <section class="pb-4">
+        <div class="container">
+          <div class="heading-box d-flex flex-column flex-sm-row align-items-center justify-content-between">
+            <h5 class="text-title fw-bold my-1">User Profile</h5>
+            <p class="text-title fs-xs"><a href="#" class="text-title">
+              <i class="fa-solid fa-house-chimney fs-xxs"></i> Home</a>
+               / <strong>User Profile</strong></p>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- content end -->
+  </div>
+  <!-- whole content end -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  <script src="assets/js/app.js" charset="utf-8"></script>
+</body>
+</html>
