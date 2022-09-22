@@ -1,0 +1,22 @@
+{
+  "name": "binance-bot2",
+  "version": "1.0.0",
+  "description": "api for binance smart trade",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "mongoose": "^6.6.1",
+    "node-binance-api": "^0.13.1",
+    "nodemon": "^2.0.20",
+    "request-ip": "^3.3.0"
+  }
+}
