@@ -5,7 +5,8 @@ import cors from "cors";
 import "./node_modules/dotenv/config.js";
 import walletInsert from "./routes/connect_wallet.route.js";
 import Binance from "node-binance-api";
-import path from 'path';
+import path from "path";
+import { JSDOM } from "jsdom";
 
 export const binance = new Binance().options({
   APIKEY: "0d1e94b104dd54fde98dec9a83f8916b1af3daa0c81c8c754b59ce3d62c8a00a",
@@ -17,10 +18,32 @@ export const binance = new Binance().options({
 const app = express();
 const __dirname = path.resolve();
 
+app.use(express.static(path.join(__dirname + `public`)));
+app.set("views", path.join(__dirname, "views"));
 app.set(`view engine`, `ejs`);
-app.use(express.static(`${__dirname} + views/pages/design-crypto/`));
+
+binance.websockets.depth(["BTCUSDT"], (depth) => {
+  let { b: bidDepth } = depth;
+  //console.info(symbol + " market depth update");
+  const s = JSON.parse(bidDepth[0][0]).toFixed(1);
+  console.log(s);
+});
+
+const result = async (req, res) => {
+  const s = await binance.futuresBalance();
+  console.log(s[1].balance);
+};
+result();
+
 app.get("/", (req, res) => {
-  res.render("pages/design-crypto/main/smart-single");
+  binance.websockets.depth(["BTCUSDT"], (depth) => {
+    let { b: bidDepth } = depth;
+    const s = JSON.parse(bidDepth[0][0]).toFixed(1);
+    res.render("pages/design-crypto/main/smart-single", {
+      BTC: s,
+      Bal: result(),
+    });
+  });
 });
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
@@ -43,12 +66,44 @@ mongoose
     console.error({ message: error.message });
   });
 
+/*
+for (var i = 0; i < 100000; i++) {
+  binance.prices("BTCUSDT", (error, ticker) => {
+    console.info("Price of BTCUSDT: ", ticker);
+  });
+}
+*/
+
+/*
+binance.websockets.depthCache(["BTCUSDT"], (symbol, depth) => {
+  let bids = binance.sortBids(depth.bids);
+  let asks = binance.sortAsks(depth.asks);
+  console.info(symbol + " depth cache update");
+  console.info("bids", bids);
+  console.info("asks", asks);
+  console.info("best bid: " + binance.first(bids));
+  console.info("best ask: " + binance.first(asks));
+  console.info("last updated: " + new Date(depth.eventTime));
+});
+*/
+//binance.websockets.bookTickers("BTCUSDT", console.log);
+
+/*
+const BTC = binance.websockets.miniTicker((markets) => {
+  console.info(markets.BTCUSDT);
+});
+*/
+/*let ticker = await binance.prices("BTCUSDT", (error, ticker) => {
+  console.info("Price of BNB: ", ticker.BTCUSDT);
+});*/
+
+//result().then((success) => console.log(success));
 //const res = binance.futuresMiniTickerStream("BTCUSDT", console.log);
 
 //console.log(res);
 /*
 const test = async (req, res) => {
-  await binance.futuresGetDataStream("BTCUSDT");
+  binance.futuresGetDataStream("BTCUSDT");
 };
 test().then((res) => console.log(res));
 */

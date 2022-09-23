@@ -1,3 +1,5 @@
+import Binance from "node-binance-api";
+/*
 const test = async (req, res) => {
     await binance.futuresGetDataStream("BTCUSDT");
   };
@@ -5,3 +7,4 @@ const test = async (req, res) => {
 
 let span = document.getElementById(BTC);
 span.innerHTML(test);
+*/
