@@ -6,6 +6,7 @@ import "./node_modules/dotenv/config.js";
 import walletInsert from "./routes/connect_wallet.route.js";
 import Binance from "node-binance-api";
 import path from "path";
+import grid from "./routes/grid.route.js";
 import { JSDOM } from "jsdom";
 
 export const binance = new Binance().options({
@@ -21,19 +22,24 @@ const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname + `public`)));
 app.set("views", path.join(__dirname, "views"));
 app.set(`view engine`, `ejs`);
-
+/*
 binance.websockets.depth(["BTCUSDT"], (depth) => {
   let { b: bidDepth } = depth;
   //console.info(symbol + " market depth update");
   const s = JSON.parse(bidDepth[0][0]).toFixed(1);
   console.log(s);
 });
-
+/
 const result = async (req, res) => {
   const s = await binance.futuresBalance();
-  console.log(s[1].balance);
+  console.log(s);
 };
 result();
+
+const r = async (req, res) => {
+  const s = await console.info(await binance.futureBuy("BTCUSDT", 0.1, 18980));
+  console.log(s);
+};
 
 app.get("/", (req, res) => {
   binance.websockets.depth(["BTCUSDT"], (depth) => {
@@ -50,6 +56,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use("/api", walletInsert);
+app.use("/api/grid", grid);
 
 app.listen(process.env.PORT);
 
