@@ -3,6 +3,6 @@ import { gridcreate } from "../controllers/price_grid.controller.js";
 
 const router = express.Router();
 
-router.post("/gridCreate", gridcreate);
+router.post("/create", gridcreate);
 
 export default router;

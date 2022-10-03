@@ -1,8 +1,19 @@
 import priceGrid from "../models/grid_model.js";
-import { binance } from "../index.js";
+//import { binance } from "../index.js";
 
 export const gridcreate = async (req, res) => {
   const data = req.body;
+  const APIKEY = data.Apikey;
+  const APISECRET = data.Apisecret;
+
+  const binance = new Binance().options({
+    APIKEY: APIKEY,
+    APISECRET: APISECRET,
+    useServerTime: true, //binance-api/node_modules/node-binance-api/node-binance-api.js/default_options/recvWindow //default: 5000
+    test: true,
+    verbose: true,
+    recvWindow: 10000000,
+  });
 
   try {
     if (!data.open_call) {

@@ -2,11 +2,13 @@ import mongoose from "mongoose";
 
 const gridModel = new mongoose.Schema({
   user_id: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "wallet_connect",
     required: true,
   },
   strategy_id: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "strategy",
     required: true,
   },
   symbol_id: {
@@ -15,25 +17,23 @@ const gridModel = new mongoose.Schema({
   },
   open_call: [
     {
-      call: {
-        margin_call: {
-          type: Number,
-          required: true,
-        },
-        margin_buy_call: {
-          type: Number,
-          //enum: [isabove, isbelow],
-          required: true,
-          //default: isabove,
-        },
-        leverage: {
-          type: Number,
-          //required: true,
-        },
-        gross_Profit: {
-          type: Number,
-          //required: true,
-        },
+      margin_call: {
+        type: Number,
+        required: true,
+      },
+      margin_buy_call: {
+        type: Number,
+        //enum: [isabove, isbelow],
+        required: true,
+        //default: isabove,
+      },
+      leverage: {
+        type: Number,
+        required: true,
+      },
+      gross_Profit: {
+        type: Number,
+        required: true,
       },
     },
   ],
@@ -64,9 +64,22 @@ const gridModel = new mongoose.Schema({
   },
   created_at: {
     type: Date,
-    default: Date.now(),
+    default: null,
   },
   created_Ip: {
+    type: String,
+    default: null,
+  },
+  modified_by: {
+    type: Number,
+    enum: [1, 2],
+    default: null,
+  },
+  modified_at: {
+    type: Date,
+    default: null,
+  },
+  modified_ip: {
     type: String,
     default: null,
   },

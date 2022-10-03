@@ -4,6 +4,7 @@ const connect_wallet = new mongoose.Schema({
   account_name: {
     type: String,
     required: true,
+    message: "Please enter the name to continue",
   },
   API_Key: {
     type: String,
