@@ -34,15 +34,18 @@ export const gridcreate = async (req, res) => {
     const order = [];
     order.length = scheck.margin_call_limit;
     for (var i = 0; i < data.open_call.length; i++) {
+      const quantity = (data.open_call[i].margin_buy_call/data.open_call[i].margin_call).toFixed(4);
       const obj = {
         symbol: symcheck.symbol,
         side: side,
         type: "LIMIT",
-        price: "19220",
-        quantity: "0.01",
+        price: data.open_call[i].margin_call,
+        quantity: quantity,
         timeInForce: "GTC",
       };
+      order.push(obj);
     }
+    console.log(order);
 
     const grid = await priceGrid
       .create({ ...data, created_at: Date.now(), created_ip: clientIp })
