@@ -31,9 +31,10 @@ const gridModel = new mongoose.Schema({
         type: Number,
         required: true,
       },
-      gross_Profit: {
+      gross_profit: {
         type: Number,
         required: true,
+        message: "please mention the gross profit",
       },
     },
   ],
@@ -66,7 +67,7 @@ const gridModel = new mongoose.Schema({
     type: Date,
     default: null,
   },
-  created_Ip: {
+  created_ip: {
     type: String,
     default: null,
   },

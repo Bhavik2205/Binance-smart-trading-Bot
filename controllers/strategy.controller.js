@@ -12,20 +12,28 @@ export const createStrategy = async (req, res) => {
   try {
     const ucheck = await User.findOne({ _id: user_id });
     const scheck = await Symbol.findOne({ _id: symbol_id });
-    if (!ucheck || !scheck) {
-      res.status(404).json({ message: "Invalid user_id or symbol_id" });
+    const strategyCheck = await Strategy.findOne({ symbol_id: symbol_id });
+
+    if (strategyCheck) {
+      res
+        .status(400)
+        .json({ message: "Strategy with this symbol already present" });
     } else {
-      if (data.margin_call_limit < 11) {
-        const strategy = await Strategy.create({
-          ...data,
-          created_ip: clientIp,
-          created_at: Date.now(),
-        });
-        res.status(201).json(strategy);
+      if (!ucheck || !scheck) {
+        res.status(404).json({ message: "Invalid user_id or symbol_id" });
       } else {
-        res.status(419).json({
-          message: "margin_call_limit should less than or equals to 10",
-        });
+        if (data.margin_call_limit < 11) {
+          const strategy = await Strategy.create({
+            ...data,
+            created_ip: clientIp,
+            created_at: Date.now(),
+          });
+          res.status(201).json(strategy);
+        } else {
+          res.status(419).json({
+            message: "margin_call_limit should less than or equals to 10",
+          });
+        }
       }
     }
   } catch (error) {
@@ -40,31 +48,39 @@ export const modifyStrategy = async (req, res) => {
   const Id = data.id;
 
   try {
-    const check = await Strategy.findOne({ _id: Id });
-    if (check) {
-      //const ucheck = await User.findOne({ _id: user_id });
-      const scheck = await Symbol.findOne({ _id: symbol_id });
-      if (!scheck) {
-        res.status(404).json({ message: "Invalid symbol_id" });
-      } else {
-        if (data.margin_call_limit < 11) {
-          const updatedData = {
-            ...data,
-            _id: Id,
-            modified_ip: clientIp,
-            modified_at: Date.now(),
-            modified_by: 1,
-          };
-          const strategy = await Strategy.findByIdAndUpdate(Id, updatedData);
-          res.status(200).json(updatedData);
-        } else {
-          res.status(419).json({
-            message: "margin_call_limit should less than or equals to 10",
-          });
-        }
-      }
+    const strategyCheck = await Strategy.findOne({ symbol_id: symbol_id });
+
+    if (strategyCheck && strategyCheck._id != Id) {
+      res
+        .status(400)
+        .json({ message: "Strategy with this symbol already present" });
     } else {
-      res.status(404).json({ message: "Strategy not found" });
+      const check = await Strategy.findOne({ _id: Id });
+      if (check) {
+        //const ucheck = await User.findOne({ _id: user_id });
+        const scheck = await Symbol.findOne({ _id: symbol_id });
+        if (!scheck) {
+          res.status(404).json({ message: "Invalid symbol_id" });
+        } else {
+          if (data.margin_call_limit < 11) {
+            const updatedData = {
+              ...data,
+              _id: Id,
+              modified_ip: clientIp,
+              modified_at: Date.now(),
+              modified_by: 1,
+            };
+            const strategy = await Strategy.findByIdAndUpdate(Id, updatedData);
+            res.status(200).json(updatedData);
+          } else {
+            res.status(419).json({
+              message: "margin_call_limit should less than or equals to 10",
+            });
+          }
+        }
+      } else {
+        res.status(404).json({ message: "Strategy not found" });
+      }
     }
   } catch (error) {
     res.status(419).json({ message: error.message });

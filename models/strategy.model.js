@@ -20,7 +20,7 @@ const strategyModel = new mongoose.Schema({
     message: "please mention the type to proceed further",
   },
   margin_call_limit: {
-    type: String,
+    type: Number,
     required: true,
   },
   created_by: {

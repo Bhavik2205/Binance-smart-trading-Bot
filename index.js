@@ -7,13 +7,10 @@ import walletInsert from "./routes/connect_wallet.route.js";
 import Binance from "node-binance-api";
 import path from "path";
 import grid from "./routes/grid.route.js";
-import { JSDOM } from "jsdom";
-import { clear } from "console";
 import symbol from "./routes/symbol.route.js";
 import admin from "./admin/route.js";
 import strategy from "./routes/strategy.route.js";
 
-/*
 export const binance = new Binance().options({
   APIKEY: "0d1e94b104dd54fde98dec9a83f8916b1af3daa0c81c8c754b59ce3d62c8a00a",
   APISECRET: "fd6302c060bdf02d8c5e369cc433eb802f6fa09b22317ae1a113f5ff86c40841",
@@ -22,7 +19,7 @@ export const binance = new Binance().options({
   verbose: true,
   recvWindow: 10000000,
 });
-*/
+
 const app = express();
 const __dirname = path.resolve();
 
@@ -108,7 +105,28 @@ for (var i = 0; i < 100000; i++) {
   });
 }
 */
-
+//console.info(await binance.futuresCancelAll("BTCUSDT"));
+/*
+let orders = [
+  {
+    symbol: "BTCUSDT",
+    side: "BUY",
+    type: "LIMIT",
+    price: "19220",
+    quantity: "0.01",
+    timeInForce: "GTC",
+  },
+  {
+    symbol: "BTCUSDT",
+    side: "BUY",
+    type: "LIMIT",
+    price: "20000",
+    quantity: "0.5",
+    timeInForce: "GTC",
+  },
+];
+console.info(await binance.futuresMultipleOrders(orders));
+*/
 /*
 binance.websockets.depthCache(["BTCUSDT"], (symbol, depth) => {
   let bids = binance.sortBids(depth.bids);
