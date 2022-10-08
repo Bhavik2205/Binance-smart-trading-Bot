@@ -17,6 +17,10 @@ const gridModel = new mongoose.Schema({
   },
   open_call: [
     {
+      Id: {
+        type: Number,
+        required: true,
+      },
       margin_call: {
         type: Number,
         required: true,
