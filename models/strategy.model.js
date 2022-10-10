@@ -19,10 +19,12 @@ const strategyModel = new mongoose.Schema({
     required: true,
     message: "please mention the type to proceed further",
   },
+  /*
   margin_call_limit: {
     type: Number,
     required: true,
   },
+  */
   created_by: {
     type: Number,
     enum: [1, 2],

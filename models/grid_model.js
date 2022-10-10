@@ -6,14 +6,23 @@ const gridModel = new mongoose.Schema({
     ref: "wallet_connect",
     required: true,
   },
-  strategy_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "strategy",
-    required: true,
-  },
-  symbol_id: {
+  symbol: {
     type: String,
-    required: true,
+    enum: [
+      "BTCUSDT",
+      "ETHUSDT",
+      "BNBUSDT",
+      "XRPUSDT",
+      "SOLUSDT",
+      "DOTUSDT",
+      "EOSUSDT",
+    ],
+    default: "BTCUSDT",
+  },
+  position_side: {
+    type: String,
+    enum: ["BUY", "SELL"],
+    default: "BUY",
   },
   open_call: [
     {
@@ -27,9 +36,7 @@ const gridModel = new mongoose.Schema({
       },
       margin_buy_call: {
         type: Number,
-        //enum: [isabove, isbelow],
         required: true,
-        //default: isabove,
       },
       leverage: {
         type: Number,
@@ -42,26 +49,6 @@ const gridModel = new mongoose.Schema({
       },
     },
   ],
-  //close_call: [
-  //  {
-  //  call: {
-  //    margin_call: {
-  //      type: Number,
-  //      required: true,
-  //    },
-  //    limit_set: {
-  //      type: String,
-  //      enum: [isabove, isbelow],
-  //      required: true,
-  //      default: isabove,
-  //    },
-  //    margin_call_times: {
-  //      type: Number,
-  //      required: true,
-  //    },
-  //    required: false,
-  //  }}
-  //],
   created_by: {
     type: Number,
     enum: [1, 2],

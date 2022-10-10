@@ -15,19 +15,14 @@ export const margin_call_size = async (req, res, next) => {
       for (var i = 0; i < data.open_call.length; i++) {
         margin_call.push(data.open_call[i].margin_call);
         margin_buy_call.push(data.open_call[i].margin_buy_call);
-        if (data.open_call[i].leverage < 6 && data.open_call[i].leverage > 1) {
-          leverage.push(data.open_call[i].leverage);
-        } else {
-          return res
-            .status(400)
-            .json({ message: "leverage should be less than or equals to 5" });
-        }
+        leverage.push(data.open_call[i].leverage);
         gross_profit.push(data.open_call[i].gross_profit);
       }
 
       const open_call = [];
       for (var i = 0; i < margin_call.length; i++) {
         const obj = {
+          Id: i + 1,
           margin_call: margin_call[i],
           margin_buy_call: margin_buy_call[i],
           leverage: leverage[i],
@@ -49,31 +44,8 @@ export const gridValidate = async (req, res, next) => {
   const data = req.body;
   try {
     const check = await User.findOne({ _id: data.user_id });
-    const scheck = await strategy.findOne({ _id: data.strategy_id });
-    const gridCheck = await priceGrid.findOne({
-      strategy_id: data.strategy_id,
-    });
     if (check) {
-      if (scheck) {
-        if (gridCheck) {
-          res
-            .status(400)
-            .json({ message: "Strategy already present in the grid" });
-        } else {
-          data.symbol_id = scheck.symbol_id;
-          const length = scheck.margin_call_limit;
-          if (data.open_call.length == length) {
-            next();
-          } else {
-            res.status(419).json({
-              message:
-                "please create the grid according to the size mention in strategy",
-            });
-          }
-        }
-      } else {
-        res.status(404).json({ message: "Invalid Strategy id" });
-      }
+      next();
     } else {
       res.status(404).json({ message: "User is not registered" });
     }
