@@ -54,101 +54,110 @@ const r = async (req, res) => {
 };
 r();
 
+/*
+const client = new ws("wss://fstream.binance.com/ws/fCfAS89zQJ7yY38xzEne3mbDVq2UREWsJW5EktL3jWhdOLqtED2qWgbhZ06EvZMG")
+client.on('open', () => {
+  client.send('hi')
+})
 const DATA_STREAM_ENDPOINT = "wss://stream.binance.com:9443/ws";
 const BINANCE_API_ROOT = "https://api.binance.com";
 const LISTEN_KEY_ENDPOINT = `${BINANCE_API_ROOT}/api/v1/userDataStream`;
 
 const fetchAccountWebsocketData = async () => {
-  const listenKey = await fetchListenKey();
-
-  console.log("-> ", listenKey); // valid key is returned
-
+  //const listenKey = await fetchListenKey();
+  
+  //console.log("-> ", listenKey); // valid key is returned
+  
   let ws;
-
+  
   try {
-    ws = await openWebSocket(
-      `${DATA_STREAM_ENDPOINT}/"TOJnu3A8LdntR3XOQntjrHEZxebtem27v1Hvi5CQSnlN7QiqBNZZRRdgiLPVMvv7"`
-    );
-  } catch (err) {
-    throw `ERROR - fetchAccountWebsocketData: ${err}`;
-  }
-
-  // Nothing returns from either
-  ws.on("message", (data) => console.log(data));
-  ws.on("outboundAccountInfo", (accountData) => console.log(accountData));
-};
-
-const openWebSocket = (endpoint) => {
-  const p = new Promise((resolve, reject) => {
-    const ws = new WebSocket(endpoint);
-
-    console.log("\n-->> New Account Websocket");
-
-    ws.on(
-      "open",
-      () => {
-        console.log("\n-->> Websocket Account open...");
-        resolve(ws);
-      },
-      (err) => {
-        console.log("fetchAccountWebsocketData error:", err);
-        reject(err);
-      }
-    );
-  });
-
-  p.catch((err) => console.log(`ERROR - fetchAccountWebsocketData: ${err}`));
-  return p;
-};
-
-const fetchListenKey = () => {
-  const p = new Promise((resolve, reject) => {
-    const options = {
-      url: LISTEN_KEY_ENDPOINT,
-      headers: {
-        "X-MBX-APIKEY":
-          "0d1e94b104dd54fde98dec9a83f8916b1af3daa0c81c8c754b59ce3d62c8a00a",
-      },
+    ws = new WebSocket(
+      `${DATA_STREAM_ENDPOINT}/"fCfAS89zQJ7yY38xzEne3mbDVq2UREWsJW5EktL3jWhdOLqtED2qWgbhZ06EvZMG"`
+      );
+      ws.onmessage("message", (data) => {
+        let stockObject = JSON.parse(data);
+        console.log(stockObject.p);
+      })
+      ws.onmessage("outboundAccountInfo", (accountData) => console.log(accountData));
+    } catch (err) {
+      console.log(err)
+      //throw `ERROR - fetchAccountWebsocketData: ${err}`;
+    }
+    
+    // Nothing returns from either
+  };
+  /*
+  const openWebSocket = (endpoint) => {
+    const p = new Promise((resolve, reject) => {
+      const ws = new WebSocket(endpoint);
+      
+      console.log("\n-->> New Account Websocket");
+      
+      ws.on(
+        "open",
+        () => {
+          console.log("\n-->> Websocket Account open...");
+          resolve(ws);
+        },
+        (err) => {
+          console.log("fetchAccountWebsocketData error:", err);
+          reject(err);
+        }
+        );
+      });
+      
+      p.catch((err) => console.log(`ERROR - fetchAccountWebsocketData: ${err}`));
+      return p;
     };
-
-    request.post(options, (err, httpResponse, body) => {
-      if (err) return reject(err);
-
-      resolve(JSON.parse(body).listenKey);
+    
+    const fetchListenKey = () => {
+      const p = new Promise((resolve, reject) => {
+        const options = {
+          url: LISTEN_KEY_ENDPOINT,
+          headers: {
+            "X-MBX-APIKEY":
+            "0d1e94b104dd54fde98dec9a83f8916b1af3daa0c81c8c754b59ce3d62c8a00a",
+          },
+        };
+        
+        request.post(options, (err, httpResponse, body) => {
+          if (err) return reject(err);
+          
+          resolve(JSON.parse(body).listenKey);
+        });
+      });
+      
+      p.catch((err) => console.log(`ERROR - fetchListenKey: ${err}`));
+      return p;
+    };
+    openWebSocket();
+    fetchListenKey();
+    
+    /*
+    
+    const data = async (req, res) => {
+      let position_data = await binance.futuresPositionRisk(),
+      markets = Object.keys(position_data);
+      for (let market of markets) {
+        let obj = position_data[market],
+        size = Number(obj.positionAmt);
+        if (size == 0) continue;
+        console.info(`${leverage}x\t${market}\t${obj.unRealizedProfit}`);
+      }
+    };
+    app.get("/", (req, res) => {
+      binance.websockets.depth(["BTCUSDT"], (depth) => {
+        let { b: bidDepth } = depth;
+        const s = JSON.parse(bidDepth[0][0]).toFixed(1);
+        res.render("pages/design-crypto/main/smart-single", {
+          BTC: s,
+          Bal: result(),
+        });
+      });
     });
-  });
-
-  p.catch((err) => console.log(`ERROR - fetchListenKey: ${err}`));
-  return p;
-};
-fetchAccountWebsocketData();
-openWebSocket();
-fetchListenKey();
-
-/*
-
-const data = async (req, res) => {
-  let position_data = await binance.futuresPositionRisk(),
-    markets = Object.keys(position_data);
-  for (let market of markets) {
-    let obj = position_data[market],
-      size = Number(obj.positionAmt);
-    if (size == 0) continue;
-    console.info(`${leverage}x\t${market}\t${obj.unRealizedProfit}`);
-  }
-};
-app.get("/", (req, res) => {
-  binance.websockets.depth(["BTCUSDT"], (depth) => {
-    let { b: bidDepth } = depth;
-    const s = JSON.parse(bidDepth[0][0]).toFixed(1);
-    res.render("pages/design-crypto/main/smart-single", {
-      BTC: s,
-      Bal: result(),
-    });
-  });
-});
-*/
-
+    fetchAccountWebsocketData();
+    */
+   
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
