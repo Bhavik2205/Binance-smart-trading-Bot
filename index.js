@@ -19,7 +19,7 @@ export const binance = new Binance().options({
   useServerTime: true, //binance-api/node_modules/node-binance-api/node-binance-api.js/default_options/recvWindow //default: 5000
   test: true,
   verbose: true,
-  recvWindow: 10000000,
+  recvWindow: 60000,
 });
 
 const app = express();
