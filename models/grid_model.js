@@ -26,27 +26,28 @@ const gridModel = new mongoose.Schema({
   },
   open_call: [
     {
-      Id: {
+      type: JSON,
+      /*Id: {
         type: Number,
-        required: true,
+        //required: true,
       },
       margin_call: {
         type: Number,
-        required: true,
+        //required: true,
       },
       margin_buy_call: {
         type: Number,
-        required: true,
+        //required: true,
       },
       leverage: {
         type: Number,
-        required: true,
+        //required: true,
       },
       gross_profit: {
         type: Number,
-        required: true,
-        message: "please mention the gross profit",
-      },
+        //required: true,
+        //message: "please mention the gross profit",
+      },*/
     },
   ],
   created_by: {

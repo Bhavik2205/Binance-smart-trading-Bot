@@ -1,9 +1,53 @@
 import priceGrid from "../models/grid_model.js";
-import strategy from "../models/strategy.model.js";
-import symbol from "../models/symbol.model.js";
 import requestIp from "request-ip";
 import User from "../models/connect_wallet.model.js";
 import Binance from "node-binance-api";
+import grid from "../models/grid_model.js";
+import WebSocket from "ws";
+import OrderHistory from "../models/order_history.model.js";
+import { parse } from "path";
+import { binance } from "../index.js";
+
+export const stream = async (req, res) => {
+  const ws = new WebSocket(
+    "wss://stream.binancefuture.com/ws/rfR6LZxazZoQjfZXjm2qOeQ1SX8z5TUW1HybZCtO33e73KQgd0FaOhYEsP2eQcdV",
+    { perMessageDeflate: false }
+  );
+  ws.on("open", (o) => {
+    ws.on("message", async (r) => {
+      try {
+        var buffer = r;
+        var step2 = buffer.toString("utf-8");
+        var parsed = JSON.parse(step2);
+        if (parsed.e == "ORDER_TRADE_UPDATE") {
+          console.log(parsed.e);
+        } else {
+          console.log(parsed.e);
+        }
+        console.log(parsed);
+        /*console.log({
+          Event: parsed.e,
+          Symbol: parsed.o.s,
+          Client_order_id: parsed.o.c,
+          Side: parsed.o.S,
+          Order_Type: parsed.o.o,
+          Time_in_Force: parsed.o.f,
+          Original_quantity: parsed.o.q,
+          //Stop_price: parsed.o.sp,
+          Execution_type: parsed.o.x,
+          Order_Status: parsed.o.X,
+          Order_id: parsed.o.i,
+          Stop_price_working_Type: parsed.o.wt,
+          Original_order_Type: parsed.o.ot,
+          Position_Side: parsed.o.ps,
+        });*/
+      } catch (error) {
+        console.log({ error: error });
+      }
+    });
+  });
+};
+stream();
 
 export const gridcreate = async (req, res) => {
   const data = req.body;
@@ -20,50 +64,85 @@ export const gridcreate = async (req, res) => {
       verbose: true,
       recvWindow: 60000,
     });
-
     const order = [];
     for (var i = 0; i < data.open_call.length; i++) {
       const quantity = (
         data.open_call[i].margin_buy_call / data.open_call[i].margin_call
       ).toFixed(2);
       const leverage = data.open_call[i].leverage;
-      const r = await binance.futuresLeverage(
-        data.symbol,
-        data.open_call[i].leverage
-      );
-      console.log(r);
-
+      const r = await binance.futuresLeverage(data.symbol, leverage);
+      //console.log(r);
+      const timeInForce = "GTC";
       const obj = {
         symbol: data.symbol,
         side: data.position_side,
         type: "LIMIT",
         price: data.open_call[i].margin_call,
         quantity: quantity,
-        futuresLeverage: data.open_call[i].leverage,
+        //futuresLeverage: data.open_call[i].leverage,
         timeInForce: "GTC",
       };
-      order.push(obj);
-      let timeInForce = "GTC";
-      const place = await binance.futuresBuy(
-        data.symbol,
-        quantity,
-        data.open_call[i].margin_call
-      );
-      console.log(place);
-      res.send({ message: place });
+      const stopPrice =
+        (data.margin_call + data.gross_profit) / 100 + data.margin_call;
+      try {
+        if (data.position_side == "BUY") {
+          let detail = await binance.futuresBuy(
+            data.symbol,
+            quantity,
+            obj.price
+          );
+          detail.leverage = data.open_call[i].leverage;
+          order.push(detail);
+          await OrderHistory.create({
+            user_id: data.user_id,
+            orderId: detail.orderId,
+            amount: data.open_call[i].margin_buy_call,
+            price: detail.price,
+            quantity: detail.origQty,
+            clientOrderId: detail.clientOrderId,
+            orderType: detail.side,
+            status: detail.status,
+            created_at: Date.now(),
+            created_Ip: clientIp,
+          });
+        } else {
+          let detail = await binance.futuresSell(
+            data.symbol,
+            quantity,
+            obj.price
+          );
+          detail.leverage = data.open_call[i].leverage;
+          order.push(detail);
+          await OrderHistory.create({
+            user_id: data.user_id,
+            orderId: detail.orderId,
+            amount: data.open_call[i].margin_buy_call,
+            price: detail.price,
+            quantity: detail.origQty,
+            clientOrderId: detail.clientOrderId,
+            orderType: detail.side,
+            status: detail.status,
+            created_at: Date.now(),
+            created_Ip: clientIp,
+          });
+        }
+        //console.log(order);
+      } catch (error) {
+        res.send(419).json(error.message);
+      }
     }
-
-    // The only time the user data (account balances) and order execution websockets will fire, is if you create or cancel an order, or an order gets filled or partially filled
-
-    /*
-      .create({ ...data, created_at: Date.now(), created_ip: clientIp })
-      .then((result) => {
-        res.status(201).json(result);
-      })
-      .catch((err) => {
-        res.status(419).json({ message: err.message });
-      }); */
+    const response = {
+      user_id: data.user_id,
+      Symbol: data.symbol,
+      Side: data.position_side,
+      open_call: order,
+      created_at: Date.now(),
+      created_ip: clientIp,
+    };
+    const save = await priceGrid.create(response);
+    //console.log(save);
+    res.status(201).json(save);
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(404).json(error.message);
   }
 };

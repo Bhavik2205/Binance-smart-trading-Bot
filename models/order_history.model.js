@@ -6,11 +6,6 @@ const orderHistoryModel = new mongoose.Schema({
     ref: "wallet_connect",
     required: true,
   },
-  strategy_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "strategy",
-    required: true,
-  },
   orderId: {
     type: String,
   },
@@ -20,7 +15,7 @@ const orderHistoryModel = new mongoose.Schema({
   price: {
     type: Number,
   },
-  grid_hit: {
+  quantity: {
     type: Number,
   },
   clientOrderId: {
@@ -29,13 +24,10 @@ const orderHistoryModel = new mongoose.Schema({
   orderType: {
     type: String,
   },
-  response: {
-    type: JSON,
-  },
   status: {
     //Success=1, Pending=2, Delete=3, Filled=4
-    type: Number,
-    enum: [1, 2, 3, 4],
+    type: String,
+    enum: ["NEW", "EXPIRED", "FILLED", "DELETE"],
     default: null,
   },
   created_by: {
@@ -65,3 +57,6 @@ const orderHistoryModel = new mongoose.Schema({
     default: null,
   },
 });
+
+var orderHistory = mongoose.model("orderHistory", orderHistoryModel);
+export default orderHistory;

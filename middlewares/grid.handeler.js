@@ -33,7 +33,9 @@ export const margin_call_size = async (req, res, next) => {
       data.open_call = open_call;
       next();
     } else {
-      next();
+      res
+        .status(419)
+        .json({ message: "please mention the condition to trade" });
     }
   } catch (error) {
     res.status(419).json({ message: error.message });

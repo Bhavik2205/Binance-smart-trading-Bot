@@ -10,7 +10,6 @@ import grid from "./routes/grid.route.js";
 import symbol from "./routes/symbol.route.js";
 import admin from "./admin/route.js";
 import strategy from "./routes/strategy.route.js";
-import WebSocket from "ws";
 
 export const binance = new Binance().options({
   APIKEY: "0d1e94b104dd54fde98dec9a83f8916b1af3daa0c81c8c754b59ce3d62c8a00a",
@@ -28,15 +27,12 @@ app.use(express.static(path.join(__dirname + `public`)));
 app.set("views", path.join(__dirname, "views"));
 app.set(`view engine`, `ejs`);
 
-const socket = new WebSocket("wss://stream.binance.com:9443/ws/BFQduA5OrafKcBimEbDRhFIz5HhH9SnkFxGFiTwPnJomrhRst9BS0Atw22yI0QAB");
+/*
+const socket = new WebSocket(
+  "wss://stream.binancefuture.com/ws/0t2rYVxeSTQ8aXOs6amJ85OKstHArJYW8bec7UGnhyw6g6uprA16Eo7Y4313Ck7u"
+);
 
-socket.onopen = data => {
-    console.log('connected');
-    socket.send(JSON.stringify([{"e": "ORDER_TRADE_UPDATE", method: 'SUBSCRIBE', id: 1}]));
-    socket.addEventListener('message', (data) => {
-      console.log({...data});
-    })
-}
+*/
 const r = async (req, res) => {
   const s = await binance.futuresGetDataStream();
   console.log(s);
@@ -67,4 +63,3 @@ mongoose
   .catch((error) => {
     console.error({ message: error.message });
   });
-
