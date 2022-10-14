@@ -250,3 +250,16 @@ const test = async (req, res) => {
 };
 test().then((res) => console.log(res));
 */
+
+const found = await orderHistory.findOne({ orderId: parsed.o.i });
+          //console.log(found);
+          const Id = found._id;
+          const updatedData = {
+            _id: Id,
+            status: parsed.o.X,
+            modified_by: 1,
+            modified_at: Date.now(),
+          };
+          const result = await orderHistory.findByIdAndUpdate(Id, updatedData);
+          //console.log(result);
+          console.log(parsed.e);

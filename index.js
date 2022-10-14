@@ -27,12 +27,6 @@ app.use(express.static(path.join(__dirname + `public`)));
 app.set("views", path.join(__dirname, "views"));
 app.set(`view engine`, `ejs`);
 
-/*
-const socket = new WebSocket(
-  "wss://stream.binancefuture.com/ws/0t2rYVxeSTQ8aXOs6amJ85OKstHArJYW8bec7UGnhyw6g6uprA16Eo7Y4313Ck7u"
-);
-
-*/
 const r = async (req, res) => {
   const s = await binance.futuresGetDataStream();
   console.log(s);
@@ -63,3 +57,5 @@ mongoose
   .catch((error) => {
     console.error({ message: error.message });
   });
+
+//console.info(await binance.futuresCancelAll("BTCUSDT"));

@@ -18,6 +18,9 @@ const orderHistoryModel = new mongoose.Schema({
   quantity: {
     type: Number,
   },
+  symbol: {
+    type: String,
+  },
   clientOrderId: {
     type: String,
   },
@@ -29,6 +32,9 @@ const orderHistoryModel = new mongoose.Schema({
     type: String,
     enum: ["NEW", "EXPIRED", "FILLED", "DELETE"],
     default: null,
+  },
+  gross_profit: {
+    type: Number,
   },
   created_by: {
     type: Number,

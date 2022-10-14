@@ -3,51 +3,9 @@ import requestIp from "request-ip";
 import User from "../models/connect_wallet.model.js";
 import Binance from "node-binance-api";
 import grid from "../models/grid_model.js";
-import WebSocket from "ws";
 import OrderHistory from "../models/order_history.model.js";
 import { parse } from "path";
 import { binance } from "../index.js";
-
-export const stream = async (req, res) => {
-  const ws = new WebSocket(
-    "wss://stream.binancefuture.com/ws/rfR6LZxazZoQjfZXjm2qOeQ1SX8z5TUW1HybZCtO33e73KQgd0FaOhYEsP2eQcdV",
-    { perMessageDeflate: false }
-  );
-  ws.on("open", (o) => {
-    ws.on("message", async (r) => {
-      try {
-        var buffer = r;
-        var step2 = buffer.toString("utf-8");
-        var parsed = JSON.parse(step2);
-        if (parsed.e == "ORDER_TRADE_UPDATE") {
-          console.log(parsed.e);
-        } else {
-          console.log(parsed.e);
-        }
-        console.log(parsed);
-        /*console.log({
-          Event: parsed.e,
-          Symbol: parsed.o.s,
-          Client_order_id: parsed.o.c,
-          Side: parsed.o.S,
-          Order_Type: parsed.o.o,
-          Time_in_Force: parsed.o.f,
-          Original_quantity: parsed.o.q,
-          //Stop_price: parsed.o.sp,
-          Execution_type: parsed.o.x,
-          Order_Status: parsed.o.X,
-          Order_id: parsed.o.i,
-          Stop_price_working_Type: parsed.o.wt,
-          Original_order_Type: parsed.o.ot,
-          Position_Side: parsed.o.ps,
-        });*/
-      } catch (error) {
-        console.log({ error: error });
-      }
-    });
-  });
-};
-stream();
 
 export const gridcreate = async (req, res) => {
   const data = req.body;
@@ -72,7 +30,6 @@ export const gridcreate = async (req, res) => {
       const leverage = data.open_call[i].leverage;
       const r = await binance.futuresLeverage(data.symbol, leverage);
       //console.log(r);
-      const timeInForce = "GTC";
       const obj = {
         symbol: data.symbol,
         side: data.position_side,
@@ -92,6 +49,7 @@ export const gridcreate = async (req, res) => {
             obj.price
           );
           detail.leverage = data.open_call[i].leverage;
+          detail.gross_profit = data.open_call[i].gross_profit;
           order.push(detail);
           await OrderHistory.create({
             user_id: data.user_id,
@@ -99,9 +57,11 @@ export const gridcreate = async (req, res) => {
             amount: data.open_call[i].margin_buy_call,
             price: detail.price,
             quantity: detail.origQty,
+            symbol: detail.symbol,
             clientOrderId: detail.clientOrderId,
             orderType: detail.side,
             status: detail.status,
+            gross_profit: data.open_call[i].gross_profit,
             created_at: Date.now(),
             created_Ip: clientIp,
           });
@@ -112,6 +72,7 @@ export const gridcreate = async (req, res) => {
             obj.price
           );
           detail.leverage = data.open_call[i].leverage;
+          detail.gross_profit = data.open_call[i].gross_profit;
           order.push(detail);
           await OrderHistory.create({
             user_id: data.user_id,
@@ -119,9 +80,11 @@ export const gridcreate = async (req, res) => {
             amount: data.open_call[i].margin_buy_call,
             price: detail.price,
             quantity: detail.origQty,
+            symbol: detail.symbol,
             clientOrderId: detail.clientOrderId,
             orderType: detail.side,
             status: detail.status,
+            gross_profit: data.open_call[i].gross_profit,
             created_at: Date.now(),
             created_Ip: clientIp,
           });
@@ -140,6 +103,7 @@ export const gridcreate = async (req, res) => {
       created_ip: clientIp,
     };
     const save = await priceGrid.create(response);
+
     //console.log(save);
     res.status(201).json(save);
   } catch (error) {
