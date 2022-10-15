@@ -18,7 +18,7 @@ mongoose
 
 export const stream = async (req, res) => {
   const ws = new WebSocket(
-    "wss://stream.binancefuture.com/ws/lt33HwVlSE8QBtF9MKJpLUl5zR1tpiUdltLOUMOBiLsXstxziOexi0Jax4EprqXz",
+    "wss://stream.binancefuture.com/ws/F2cXuLMK1OZlqaiRDiX9eB8z2GTO83noR30UBJZFuiPQzPc51Hyv6wOKKLa027FQ",
     { perMessageDeflate: false }
   );
   ws.on("open", (o) => {
@@ -27,13 +27,10 @@ export const stream = async (req, res) => {
         var buffer = r;
         var step2 = buffer.toString("utf-8");
         var parsed = JSON.parse(step2);
-        if (
-          parsed.e == "ORDER_TRADE_UPDATE" //&&
-          //parsed.o.x == ("FILLED" || "EXPIRED")
-        ) {
+        if (parsed.e == "ORDER_TRADE_UPDATE") {
           const found = await orderHistory
             .findOne({ orderId: parsed.o.i })
-            .maxTimeMS(5000);
+            .maxTimeMS(3000);
           console.log({
             clientOrderId: parsed.o.c,
             OrderId: parsed.o.i,
@@ -47,10 +44,9 @@ export const stream = async (req, res) => {
               modified_by: 1,
               modified_at: Date.now(),
             };
-            const result = await orderHistory.findByIdAndUpdate(
-              Id,
-              updatedData
-            );
+            const result = await orderHistory
+              .findByIdAndUpdate(Id, updatedData)
+              .maxTimeMS(3000); /*
             if (parsed.o.x == "FILLED" && parsed.o.S == "BUY") {
               const stopPrice =
                 (found.price * found.gross_profit) / 100 + found.price;
@@ -60,10 +56,10 @@ export const stream = async (req, res) => {
                   found.quantity,
                   stopPrice
                 )
-              );*/
+              );
               console.log(parsed.o.s, parsed.o.q, stopPrice);
               console.log({ result: result });
-            }
+            }*/
           } else {
             console.log("not found");
           }
@@ -98,4 +94,22 @@ export const stream = async (req, res) => {
     });
   });
 };
-stream();
+
+/*
+await Promise.all([
+  orderHistory
+    .findOne({ orderId: parsed.o.i })
+    .maxTimeMS(40000)
+    .then(async (res) => {
+      const Id = res._id;
+      const updatedData = {
+        _id: Id,
+        status: parsed.o.X,
+        modified_by: 1,
+        modified_at: Date.now(),
+      };
+      const result = await orderHistory.findByIdAndUpdate(Id, updatedData);
+    }),
+  timeout(5000),
+]);
+*/

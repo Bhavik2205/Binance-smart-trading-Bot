@@ -10,6 +10,7 @@ import grid from "./routes/grid.route.js";
 import symbol from "./routes/symbol.route.js";
 import admin from "./admin/route.js";
 import strategy from "./routes/strategy.route.js";
+import { stream } from "./streaming.js";
 
 export const binance = new Binance().options({
   APIKEY: "0d1e94b104dd54fde98dec9a83f8916b1af3daa0c81c8c754b59ce3d62c8a00a",
@@ -58,4 +59,5 @@ mongoose
     console.error({ message: error.message });
   });
 
-//console.info(await binance.futuresCancelAll("BTCUSDT"));
+console.info(await binance.futuresCancelAll("BTCUSDT"));
+stream();

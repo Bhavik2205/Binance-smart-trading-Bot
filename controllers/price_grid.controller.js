@@ -4,8 +4,6 @@ import User from "../models/connect_wallet.model.js";
 import Binance from "node-binance-api";
 import grid from "../models/grid_model.js";
 import OrderHistory from "../models/order_history.model.js";
-import { parse } from "path";
-import { binance } from "../index.js";
 
 export const gridcreate = async (req, res) => {
   const data = req.body;
@@ -51,6 +49,7 @@ export const gridcreate = async (req, res) => {
           detail.leverage = data.open_call[i].leverage;
           detail.gross_profit = data.open_call[i].gross_profit;
           order.push(detail);
+          /*
           await OrderHistory.create({
             user_id: data.user_id,
             orderId: detail.orderId,
@@ -65,6 +64,7 @@ export const gridcreate = async (req, res) => {
             created_at: Date.now(),
             created_Ip: clientIp,
           });
+          */
         } else {
           let detail = await binance.futuresSell(
             data.symbol,
@@ -74,6 +74,7 @@ export const gridcreate = async (req, res) => {
           detail.leverage = data.open_call[i].leverage;
           detail.gross_profit = data.open_call[i].gross_profit;
           order.push(detail);
+          /* 
           await OrderHistory.create({
             user_id: data.user_id,
             orderId: detail.orderId,
@@ -87,7 +88,7 @@ export const gridcreate = async (req, res) => {
             gross_profit: data.open_call[i].gross_profit,
             created_at: Date.now(),
             created_Ip: clientIp,
-          });
+          });*/
         }
         //console.log(order);
       } catch (error) {
