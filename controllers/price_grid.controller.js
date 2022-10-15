@@ -22,13 +22,14 @@ export const gridcreate = async (req, res) => {
     });
     const order = [];
     for (var i = 0; i < data.open_call.length; i++) {
-      const quantity = (
+      order.push(data.open_call[i]);
+      /*const quantity = (
         data.open_call[i].margin_buy_call / data.open_call[i].margin_call
-      ).toFixed(2);
-      const leverage = data.open_call[i].leverage;
-      const r = await binance.futuresLeverage(data.symbol, leverage);
+      ).toFixed(2);*/
+      //const leverage = data.open_call[i].leverage;
+      //const r = await binance.futuresLeverage(data.symbol, leverage);
       //console.log(r);
-      const obj = {
+      /*const obj = {
         symbol: data.symbol,
         side: data.position_side,
         type: "LIMIT",
@@ -64,36 +65,82 @@ export const gridcreate = async (req, res) => {
             created_at: Date.now(),
             created_Ip: clientIp,
           });
-          */
-        } else {
-          let detail = await binance.futuresSell(
-            data.symbol,
-            quantity,
-            obj.price
-          );
-          detail.leverage = data.open_call[i].leverage;
-          detail.gross_profit = data.open_call[i].gross_profit;
-          order.push(detail);
-          /* 
-          await OrderHistory.create({
-            user_id: data.user_id,
-            orderId: detail.orderId,
-            amount: data.open_call[i].margin_buy_call,
-            price: detail.price,
-            quantity: detail.origQty,
-            symbol: detail.symbol,
-            clientOrderId: detail.clientOrderId,
-            orderType: detail.side,
-            status: detail.status,
-            gross_profit: data.open_call[i].gross_profit,
-            created_at: Date.now(),
-            created_Ip: clientIp,
-          });*/
-        }
-        //console.log(order);
-      } catch (error) {
-        res.send(419).json(error.message);
-      }
+          *//*
+    } else {
+      let detail = await binance.futuresSell(
+        data.symbol,
+        quantity,
+        obj.price
+      );
+      detail.leverage = data.open_call[i].leverage;
+      detail.gross_profit = data.open_call[i].gross_profit;
+      order.push(detail);
+      *//* 
+      await OrderHistory.create({
+        user_id: data.user_id,
+        orderId: detail.orderId,
+        amount: data.open_call[i].margin_buy_call,
+        price: detail.price,
+        quantity: detail.origQty,
+        symbol: detail.symbol,
+        clientOrderId: detail.clientOrderId,
+        orderType: detail.side,
+        status: detail.status,
+        gross_profit: data.open_call[i].gross_profit,
+        created_at: Date.now(),
+        created_Ip: clientIp,
+      });
+    }
+    //console.log(order);
+  } catch (error) {
+    res.send(419).json(error.message);
+  } */
+    }
+    const quantity = (
+      data.open_call[0].margin_buy_call / data.open_call[0].margin_call
+    ).toFixed(2);
+    const leverage = data.open_call[0].leverage;
+    const r = await binance.futuresLeverage(data.symbol, leverage);
+    if (data.position_side == "BUY") {
+      let detail = await binance.futuresBuy(
+        data.symbol,
+        quantity,
+        data.open_call[0].margin_call
+      );
+      await OrderHistory.create({
+        user_id: data.user_id,
+        orderId: detail.orderId,
+        amount: data.open_call[0].margin_buy_call,
+        price: detail.price,
+        quantity: detail.origQty,
+        symbol: detail.symbol,
+        clientOrderId: detail.clientOrderId,
+        orderType: detail.side,
+        status: detail.status,
+        gross_profit: data.open_call[0].gross_profit,
+        created_at: Date.now(),
+        created_Ip: clientIp,
+      });
+    } else {
+      let detail = await binance.futuresSell(
+        data.symbol,
+        quantity,
+        data.open_call[0].margin_call
+      );
+      await OrderHistory.create({
+        user_id: data.user_id,
+        orderId: detail.orderId,
+        amount: data.open_call[0].margin_buy_call,
+        price: detail.price,
+        quantity: detail.origQty,
+        symbol: detail.symbol,
+        clientOrderId: detail.clientOrderId,
+        orderType: detail.side,
+        status: detail.status,
+        gross_profit: data.open_call[0].gross_profit,
+        created_at: Date.now(),
+        created_Ip: clientIp,
+      });
     }
     const response = {
       user_id: data.user_id,
@@ -108,6 +155,6 @@ export const gridcreate = async (req, res) => {
     //console.log(save);
     res.status(201).json(save);
   } catch (error) {
-    res.status(404).json(error.message);
+    console.log(error);
   }
 };

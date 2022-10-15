@@ -18,7 +18,7 @@ mongoose
 
 export const stream = async (req, res) => {
   const ws = new WebSocket(
-    "wss://stream.binancefuture.com/ws/F2cXuLMK1OZlqaiRDiX9eB8z2GTO83noR30UBJZFuiPQzPc51Hyv6wOKKLa027FQ",
+    "wss://stream.binancefuture.com/ws/mWAogtRwScY0Rsd4y10RksZRxBIGBPQtniE3UeGkjMoWrW1gTf82Qv43B7yiM5TG",
     { perMessageDeflate: false }
   );
   ws.on("open", (o) => {
@@ -61,8 +61,20 @@ export const stream = async (req, res) => {
               console.log({ result: result });
             }*/
           } else {
-            console.log("not found");
-          }
+            await orderHistory.create({
+              user_id: data.user_id,
+              orderId: detail.orderId,
+              amount: data.open_call[i].margin_buy_call,
+              price: detail.price,
+              quantity: detail.origQty,
+              symbol: detail.symbol,
+              clientOrderId: detail.clientOrderId,
+              orderType: detail.side,
+              status: detail.status,
+              gross_profit: data.open_call[i].gross_profit,
+              created_at: Date.now(),
+              created_Ip: clientIp,
+            });          }
         } else {
           //console.log({ Account_Update: parsed });
         }
