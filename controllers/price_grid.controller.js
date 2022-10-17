@@ -22,10 +22,10 @@ export const gridcreate = async (req, res) => {
     });
     const order = [];
     for (var i = 0; i < data.open_call.length; i++) {
-      order.push(data.open_call[i]);
+      order.push(data.open_call[i]); /*
       /*const quantity = (
         data.open_call[i].margin_buy_call / data.open_call[i].margin_call
-      ).toFixed(2);*/
+      ).toFixed(2);*/ /*
       //const leverage = data.open_call[i].leverage;
       //const r = await binance.futuresLeverage(data.symbol, leverage);
       //console.log(r);
@@ -65,7 +65,7 @@ export const gridcreate = async (req, res) => {
             created_at: Date.now(),
             created_Ip: clientIp,
           });
-          *//*
+          
     } else {
       let detail = await binance.futuresSell(
         data.symbol,
@@ -75,7 +75,7 @@ export const gridcreate = async (req, res) => {
       detail.leverage = data.open_call[i].leverage;
       detail.gross_profit = data.open_call[i].gross_profit;
       order.push(detail);
-      *//* 
+      */ /* 
       await OrderHistory.create({
         user_id: data.user_id,
         orderId: detail.orderId,
@@ -107,7 +107,7 @@ export const gridcreate = async (req, res) => {
         quantity,
         data.open_call[0].margin_call
       );
-      await OrderHistory.create({
+      const saved = await OrderHistory.create({
         user_id: data.user_id,
         orderId: detail.orderId,
         amount: data.open_call[0].margin_buy_call,
@@ -121,13 +121,14 @@ export const gridcreate = async (req, res) => {
         created_at: Date.now(),
         created_Ip: clientIp,
       });
+      console.log(saved);
     } else {
       let detail = await binance.futuresSell(
         data.symbol,
         quantity,
         data.open_call[0].margin_call
       );
-      await OrderHistory.create({
+      const saved = await OrderHistory.create({
         user_id: data.user_id,
         orderId: detail.orderId,
         amount: data.open_call[0].margin_buy_call,
@@ -141,6 +142,7 @@ export const gridcreate = async (req, res) => {
         created_at: Date.now(),
         created_Ip: clientIp,
       });
+      console.log(saved);
     }
     const response = {
       user_id: data.user_id,

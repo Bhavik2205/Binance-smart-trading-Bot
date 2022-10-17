@@ -12,7 +12,8 @@ import admin from "./admin/route.js";
 import strategy from "./routes/strategy.route.js";
 import WebSocket from "ws";
 import orderHistory from "./models/order_history.model.js";
-//import { stream } from "./streaming.js";
+import requestIp from "request-ip";
+import { stream } from "./streaming.js";
 
 //Binance Connection with default API_Key and API_Secret for test Only
 export const binance = new Binance().options({
@@ -63,11 +64,11 @@ mongoose
   });
 
 //console.info(await binance.futuresCancelAll("BTCUSDT"));
-
+/*
 const stream = async (req, res) => {
   const ws = new WebSocket(
-    "wss://stream.binancefuture.com/ws/mWAogtRwScY0Rsd4y10RksZRxBIGBPQtniE3UeGkjMoWrW1gTf82Qv43B7yiM5TG",
-    { perMessageDeflate: false }
+    "wss://stream.binancefuture.com/ws/44OtZzcuXqWfcemlDl0kxj20EZ6RTeSIh4ASqgs4ZJ073dKtvAlVyXu8g3TCIDeH",
+    { perMessageDeflate: true }
   );
   ws.on("open", (o) => {
     ws.on("message", async (r) => {
@@ -75,84 +76,81 @@ const stream = async (req, res) => {
         var buffer = r;
         var step2 = buffer.toString("utf-8");
         var parsed = JSON.parse(step2);
-        console.log(parsed);
-        if (parsed.e == "ORDER_TRADE_UPDATE" && (parsed.o.X == "FILLED" || parsed.o.X == "EXPIRED")) {
-          const found = await orderHistory
-            .findOne({ orderId: parsed.o.i })
-            .maxTimeMS(3000);
-          console.log({
-            clientOrderId: parsed.o.c,
-            OrderId: parsed.o.i,
-            status: parsed.o.X,
-          });
-          if (found) {
+        //console.log(parsed);
+        //const clientIp = requestIp.getClientIp(req);
+        if (parsed.o.X == "FILLED" || parsed.o.X == "EXPIRED") {
+          const status = parsed.o.X;
+          setTimeout(async () => {
+            const found = await orderHistory.findOne({
+              clientOrderId: parsed.o.c,
+            });
             const Id = found._id;
-            const updatedData = {
-              _id: Id,
-              status: parsed.o.X,
-              modified_by: 1,
-              modified_at: Date.now(),
-            };
-            const result = await orderHistory
-              .findByIdAndUpdate(Id, updatedData)
-              .maxTimeMS(3000); /*
-            if (parsed.o.x == "FILLED" && parsed.o.S == "BUY") {
-              const stopPrice =
-                (found.price * found.gross_profit) / 100 + found.price;
-              /*console.info(
-                await binance.futuresSell(
-                  found.symbol,
-                  found.quantity,
-                  stopPrice
-                )
+
+            console.log(
+              await orderHistory.findByIdAndUpdate(Id, { status: status })
+            );
+            const stopPrice =
+              (found.price + found.gross_profit) / 100 + found.price;
+            const price = Math.round(stopPrice);
+            console.log(stopPrice);
+            if (status === "FILLED" && found.orderType === "BUY") {
+              const gpOrder = await binance.futuresSell(
+                found.symbol,
+                found.quantity,
+                price
               );
-              console.log(parsed.o.s, parsed.o.q, stopPrice);
-              console.log({ result: result });
-            }*/
-          } else {
-            await orderHistory.create({
-              user_id: data.user_id,
-              orderId: detail.orderId,
-              amount: data.open_call[i].margin_buy_call,
-              price: detail.price,
-              quantity: detail.origQty,
-              symbol: detail.symbol,
-              clientOrderId: detail.clientOrderId,
-              orderType: detail.side,
-              status: detail.status,
-              gross_profit: data.open_call[i].gross_profit,
-              created_at: Date.now(),
-              created_Ip: clientIp,
-            });          }
-        } else {
-          //console.log({ Account_Update: parsed });
+              console.log(gpOrder);
+              const saved = await orderHistory.create({
+                user_id: found.user_id,
+                orderId: gpOrder.orderId,
+                amount: price,
+                price: gpOrder.price,
+                quantity: gpOrder.origQty,
+                symbol: gpOrder.symbol,
+                clientOrderId: gpOrder.clientOrderId,
+                orderType: gpOrder.side,
+                status: gpOrder.status,
+                gross_profit: price - found.price,
+                created_at: Date.now(),
+                created_Ip: found.created_Ip,
+              });
+              console.log(saved);
+            } else if (status === "FILLED" && found.orderType === "SELL") {
+              const gpOrder = await binance.futuresBuy(
+                found.symbol,
+                found.quantity,
+                price
+              );
+              console.log();
+              const saved = await orderHistory.create({
+                user_id: found.user_id,
+                orderId: gpOrder.orderId,
+                amount: price,
+                price: gpOrder.price,
+                quantity: gpOrder.origQty,
+                symbol: gpOrder.symbol,
+                clientOrderId: gpOrder.clientOrderId,
+                orderType: gpOrder.side,
+                status: gpOrder.status,
+                gross_profit: price - found.price,
+                created_at: Date.now(),
+                created_Ip: found.created_Ip,
+              });
+              console.log(saved);
+            }
+          }, 2000);
         }
-        /*console.log({
-              Event: parsed.e,
-              Symbol: parsed.o.s,
-              Client_order_id: parsed.o.c,
-              Side: parsed.o.S,
-              Order_Type: parsed.o.o,
-              Time_in_Force: parsed.o.f,
-              Original_quantity: parsed.o.q,
-              //Stop_price: parsed.o.sp,
-              Execution_type: parsed.o.x,
-              Order_Status: parsed.o.X,
-              Order_id: parsed.o.i,
-              Stop_price_working_Type: parsed.o.wt,
-              Original_order_Type: parsed.o.ot,
-              Position_Side: parsed.o.ps,
-            });*/
       } catch (error) {
-        if (
-          error.message === "Cannot read properties of undefined (reading 's')"
-        ) {
-          console.log("null");
-        } else {
-          console.log({ error: error.message });
-        }
+        // if (
+        //   error.message === "Cannot read properties of undefined (reading 's')"
+        // ) {
+        //  console.log("null");
+        // } else {
+        console.log({ error: error.message });
+        //}
       }
     });
   });
 };
+*/
 stream();
