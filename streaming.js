@@ -19,7 +19,7 @@ mongoose
 */
 export const stream = async (req, res) => {
   const ws = new WebSocket(
-    "wss://stream.binancefuture.com/ws/44OtZzcuXqWfcemlDl0kxj20EZ6RTeSIh4ASqgs4ZJ073dKtvAlVyXu8g3TCIDeH",
+    "wss://stream.binancefuture.com/ws/7QygXlHif0iJt41b1HT57P2AyLh48LKn1xpoyECgTGwyZckGUhh6oDHXhWZCbvMq",
     { perMessageDeflate: true }
   );
   ws.on("open", (o) => {
@@ -105,3 +105,5 @@ export const stream = async (req, res) => {
   });
 };
 stream();
+
+//check for hedge mode before proceding of rsi grid

@@ -4,7 +4,7 @@ const gridModel = new mongoose.Schema({
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "wallet_connect",
-    required: true,
+    //required: true,
   },
   symbol: {
     type: String,
