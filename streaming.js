@@ -19,7 +19,7 @@ mongoose
 */
 export const stream = async (req, res) => {
   const ws = new WebSocket(
-    "wss://stream.binancefuture.com/ws/7QygXlHif0iJt41b1HT57P2AyLh48LKn1xpoyECgTGwyZckGUhh6oDHXhWZCbvMq",
+    "wss://stream.binancefuture.com/ws/v52o4PkjOvRjqFRKN8lU1eMwWrjrG9tl6Va1cgMKMxGlcMXBnouE6wTkJffjgF7Q",
     { perMessageDeflate: true }
   );
   ws.on("open", (o) => {

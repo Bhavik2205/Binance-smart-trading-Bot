@@ -30,7 +30,7 @@ const orderHistoryModel = new mongoose.Schema({
   status: {
     //Success=1, Pending=2, Delete=3, Filled=4
     type: String,
-    enum: ["NEW", "EXPIRED", "FILLED", "DELETE"],
+    enum: ["NEW", "EXPIRED", "FILLED", "DELETE", null],
     default: null,
   },
   gross_profit: {
